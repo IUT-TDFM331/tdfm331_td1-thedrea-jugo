@@ -150,10 +150,10 @@ public class ListApiServiceTest {
         m331.getListEmployees().add(hugo);
         m331.getListEmployees().add(theo);
 
-        assertEquals(true, m331.findByName("Julien"));
-        assertEquals(true, m331.findByName("Andrea"));
-        assertEquals(true, m331.findByName("Hugo"));
-        assertEquals(true, m331.findByName("Theo"));
+        Assert.assertEquals(true, m331.findByName("Julien"));
+        Assert.assertEquals(true, m331.findByName("Andrea"));
+        Assert.assertEquals(true, m331.findByName("Hugo"));
+        Assert.assertEquals(true, m331.findByName("Theo"));
 
 
     }
@@ -172,10 +172,10 @@ public class ListApiServiceTest {
         m331.getListEmployees().add(hugo);
         m331.getListEmployees().add(theo);
 
-        assertEquals(false, m331.findByName("Julien"));
-        assertEquals(true, m331.findByName("Andrea"));
-        assertEquals(true, m331.findByName("Hugo"));
-        assertEquals(true, m331.findByName("Theo"));
+        Assert.assertEquals(false, m331.findByName("Julien"));
+        Assert.assertEquals(true, m331.findByName("Andrea"));
+        Assert.assertEquals(true, m331.findByName("Hugo"));
+        Assert.assertEquals(true, m331.findByName("Theo"));
 
 
     }
