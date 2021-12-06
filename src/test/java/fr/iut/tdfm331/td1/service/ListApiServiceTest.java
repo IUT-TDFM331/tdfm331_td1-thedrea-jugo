@@ -23,7 +23,6 @@ public class ListApiServiceTest {
     public void setupService() {
         service = new ListApiService();
     }
-
     /**
      * Test to check if list of Meeting is ∞correctly generated
      */
@@ -84,17 +83,54 @@ public class ListApiServiceTest {
     @Test
     public void removeMeeting(){
 
+        // Create list Employee
+        List<Employee> listEmployees = Arrays.asList(new Employee("Baptiste", "baptiste@lamzone.com", 4),
+                new Employee("Fanny", "fanny@lamzone.com", 10),
+                new Employee("Vincent", "vincent@lamzone.com", 22));
 
+        // Create list Meeting
+        Meeting newMeeting = new Meeting("Réunion d'avancement",
+                "Planck",
+                "12/11/20",
+                "15:30",
+                "16:00",
+                "Revues des dernières actions",
+                listEmployees);
+
+        // Add Meeting
+        service.addMeeting(newMeeting);
+
+        service.removeMeeting(newMeeting);
+        Assert.assertFalse(service.getListMeetings().contains(newMeeting));
     }
 
     @Test
-    public void findByObjectExist(){
+    public void findByObjectExist() throws MeetingNotFound {
         //meeting qui existe
 
+        // Create list Employee
+        List<Employee> listEmployees = Arrays.asList(new Employee("Baptiste", "baptiste@lamzone.com", 4),
+                new Employee("Fanny", "fanny@lamzone.com", 10),
+                new Employee("Vincent", "vincent@lamzone.com", 22));
+
+        // Create list Meeting
+        Meeting newMeeting = new Meeting("Réunion d'avancement",
+                "Planck",
+                "12/11/20",
+                "15:30",
+                "16:00",
+                "Revues des dernières actions",
+                listEmployees);
+
+        // Add Meeting
+        service.addMeeting(newMeeting);
+
+        Assert.assertEquals(service.findByObject("Réunion d'avancement"),newMeeting);
+
     }
 
     @Test
-    public void findByObjectNotExist(){
+    public void findByObjectNotExist() throws MeetingNotFound{
         //meeting meeting n'existe pas
 
     }
