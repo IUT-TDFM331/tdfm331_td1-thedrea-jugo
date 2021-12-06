@@ -50,5 +50,6 @@ Andréa Larboullet-Marin
 Théo Ripoll
 Julien Didier
 Hugo Gonçalves Silva
+Gautier
 ```
 
