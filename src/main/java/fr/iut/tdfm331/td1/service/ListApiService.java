@@ -13,7 +13,7 @@ import java.util.function.Predicate;
  */
 public class ListApiService {
 
-    private final List<Employee> listEmployees = ListEmployeesGenerator.generateListEmployee();
+    private List<Employee> listEmployees = ListEmployeesGenerator.generateListEmployee();
 
     private final ArrayList<Meeting> listMeetings = ListMeetingsGenerator.generateListMeetings();
 
@@ -22,6 +22,10 @@ public class ListApiService {
      */
     public List<Employee> getListEmployees() {
         return this.listEmployees;
+    }
+
+    public void setListEmployees(List<Employee> l) {
+        this.listEmployees = l;
     }
 
     /**

@@ -133,6 +133,8 @@ public class ListApiServiceTest {
     public void findByObjectNotExist() throws MeetingNotFound{
         //meeting meeting n'existe pas
 
+
+
     }
 
     @Test
@@ -140,20 +142,19 @@ public class ListApiServiceTest {
         //employé qui existe
 
         ListApiService m331 = new ListApiService() ;
+
         Employee julien = new Employee("Julien", "julien.didier@etu.unice.fr", 1);
         Employee andrea = new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2);
         Employee hugo = new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3);
         Employee theo = new Employee("Theo", "theo.ripoll@etu.unice.fr", 4);
 
-        m331.getListEmployees().add(julien);
-        m331.getListEmployees().add(andrea);
-        m331.getListEmployees().add(hugo);
-        m331.getListEmployees().add(theo);
+        List<Employee> listEmployees = Arrays.asList(julien, andrea, hugo, theo);
+        m331.setListEmployees(listEmployees);
 
-        Assert.assertEquals(true, m331.findByName("Julien"));
-        Assert.assertEquals(true, m331.findByName("Andrea"));
-        Assert.assertEquals(true, m331.findByName("Hugo"));
-        Assert.assertEquals(true, m331.findByName("Theo"));
+        Assert.assertEquals(julien, m331.findByName("Julien"));
+        Assert.assertEquals(andrea, m331.findByName("Andrea"));
+        Assert.assertEquals(hugo, m331.findByName("Hugo"));
+        Assert.assertEquals(theo, m331.findByName("Theo"));
 
 
     }
@@ -163,20 +164,23 @@ public class ListApiServiceTest {
         //employé n'existe pas
 
         ListApiService m331 = new ListApiService() ;
+
         Employee julien = new Employee("Julien", "julien.didier@etu.unice.fr", 1);
         Employee andrea = new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2);
         Employee hugo = new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3);
         Employee theo = new Employee("Theo", "theo.ripoll@etu.unice.fr", 4);
 
-        m331.getListEmployees().add(andrea);
-        m331.getListEmployees().add(hugo);
-        m331.getListEmployees().add(theo);
+        List<Employee> listEmployees = Arrays.asList(andrea, hugo, theo);
+        m331.setListEmployees(listEmployees);
 
-        Assert.assertEquals(false, m331.findByName("Julien"));
-        Assert.assertEquals(true, m331.findByName("Andrea"));
-        Assert.assertEquals(true, m331.findByName("Hugo"));
-        Assert.assertEquals(true, m331.findByName("Theo"));
-
-
+        try {
+            Assert.assertEquals(new EmployeeNotFound(), m331.findByName("Julien"));
+            Assert.assertEquals(andrea, m331.findByName("Andrea"));
+            Assert.assertEquals(hugo, m331.findByName("Hugo"));
+            Assert.assertEquals(theo, m331.findByName("Theo"));
+        }
+        catch(EmployeeNotFound e){
+            e.getMessage();
+        }
     }
 }
