@@ -48,7 +48,7 @@ codes couvert/non couverts par les tests.
 ```
 Andréa Larboullet-Marin
 Théo Ripoll
-Julien Didier
+Julien Didier LE BOSSS BG 
 Hugo Gonçalves Silva
 ```
 
