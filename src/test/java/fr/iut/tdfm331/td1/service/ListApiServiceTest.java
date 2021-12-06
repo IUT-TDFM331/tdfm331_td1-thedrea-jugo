@@ -175,9 +175,6 @@ public class ListApiServiceTest {
 
         try {
             Assert.assertEquals(new EmployeeNotFound(), m331.findByName("Julien"));
-            Assert.assertEquals(andrea, m331.findByName("Andrea"));
-            Assert.assertEquals(hugo, m331.findByName("Hugo"));
-            Assert.assertEquals(theo, m331.findByName("Theo"));
         }
         catch(EmployeeNotFound e){
             e.getMessage();
