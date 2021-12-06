@@ -159,7 +159,7 @@ public class ListApiServiceTest {
     }
 
     @Test
-    public void findByNameNotExist(){
+    public void findByNameNotExist() throws EmployeeNotFound{
         //employé n'existe pas
 
         ListApiService m331 = new ListApiService() ;
