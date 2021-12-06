@@ -47,5 +47,9 @@ codes couvert/non couverts par les tests.
 ## Contributors 
 ```java
 //TODO
+Andréa Larboullet-Marin
+Théo Ripoll
+Julien Didier
+Hugo Gonçalves Silva
 ```
 
