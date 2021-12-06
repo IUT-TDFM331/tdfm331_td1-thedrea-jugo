@@ -84,17 +84,30 @@ public class ListApiServiceTest {
     @Test
     public void removeMeeting(){
 
-    }
-
-    @Test
-    public void findByObject(){
-        //meeting qui existe et quand meeting n'existe pas
 
     }
 
     @Test
-    public void findByName(){
-        //employé qui existe et quand employé n'existe pas
+    public void findByObjectExist(){
+        //meeting qui existe
+
+    }
+
+    @Test
+    public void findByObjectNotExist(){
+        //meeting meeting n'existe pas
+
+    }
+
+    @Test
+    public void findByNameExist(){
+        //employé qui existe
+
+    }
+
+    @Test
+    public void findByNameNotExist(){
+        //employé n'existe pas
 
     }
 }
