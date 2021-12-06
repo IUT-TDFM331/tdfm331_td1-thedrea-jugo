@@ -80,4 +80,21 @@ public class ListApiServiceTest {
         service.getListMeetings().remove(meetingToRemove);
         Assert.assertFalse(service.getListMeetings().contains(meetingToRemove));
     }
+
+    @Test
+    public void removeMeeting(){
+
+    }
+
+    @Test
+    public void findByObject(){
+        //meeting qui existe et quand meeting n'existe pas
+
+    }
+
+    @Test
+    public void findByName(){
+        //employé qui existe et quand employé n'existe pas
+
+    }
 }
