@@ -84,9 +84,7 @@ public class ListApiService {
 
         if (employee.isPresent()) {
             return employee.get();
-        } else {
-            throw new EmployeeNotFound();
-        }
+        } else throw new EmployeeNotFound();
     }
 
 }

@@ -6,6 +6,8 @@ import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 
 import java.util.Arrays;
 import java.util.List;
@@ -141,43 +143,48 @@ public class ListApiServiceTest {
     public void findByNameExist() throws EmployeeNotFound{
         //employé qui existe
 
-        ListApiService m331 = new ListApiService() ;
+        List<Employee> listEmployees = Arrays.asList(new Employee("Julien", "julien.didier@etu.unice.fr", 1),
+                new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2),
+                new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3),
+                new Employee("Theo", "theo.ripoll@etu.unice.fr", 4));
 
-        Employee julien = new Employee("Julien", "julien.didier@etu.unice.fr", 1);
-        Employee andrea = new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2);
-        Employee hugo = new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3);
-        Employee theo = new Employee("Theo", "theo.ripoll@etu.unice.fr", 4);
+        Meeting newMeeting = new Meeting("Réunion d'avancement",
+                "Room",
+                "12/11/21",
+                "15:30",
+                "16:00",
+                "Revues des dernières actions",
+                listEmployees);
 
-        List<Employee> listEmployees = Arrays.asList(julien, andrea, hugo, theo);
-        m331.setListEmployees(listEmployees);
+        service.addMeeting(newMeeting);
 
-        Assert.assertEquals(julien, m331.findByName("Julien"));
-        Assert.assertEquals(andrea, m331.findByName("Andrea"));
-        Assert.assertEquals(hugo, m331.findByName("Hugo"));
-        Assert.assertEquals(theo, m331.findByName("Theo"));
-
+        Assert.assertNotEquals(service.findByName("Julien"), null);
 
     }
-
+@Disabled
     @Test
     public void findByNameNotExist() throws EmployeeNotFound{
         //employé n'existe pas
 
-        ListApiService m331 = new ListApiService() ;
+        List<Employee> listEmployees = service.getListEmployees();
 
         Employee julien = new Employee("Julien", "julien.didier@etu.unice.fr", 1);
         Employee andrea = new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2);
         Employee hugo = new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3);
         Employee theo = new Employee("Theo", "theo.ripoll@etu.unice.fr", 4);
 
-        List<Employee> listEmployees = Arrays.asList(andrea, hugo, theo);
-        m331.setListEmployees(listEmployees);
+        listEmployees.add(1, andrea);
+        listEmployees.add(2, hugo);
+        listEmployees.add(3, theo);
+
+        Assert.assertEquals(service.findByName("Andrea"), andrea);
 
         try {
-            Assert.assertEquals(new EmployeeNotFound(), m331.findByName("Julien"));
+            service.findByName("Julien");
+            Assertions.fail("Employee not found");
         }
         catch(EmployeeNotFound e){
-            e.getMessage();
+            Assert.assertEquals(null, e.getMessage());
         }
     }
 }
