@@ -133,10 +133,38 @@ public class ListApiServiceTest {
 
     @Test
     public void findByObjectNotExist() throws MeetingNotFound{
-        //meeting meeting n'existe pas
+        //meeting meeting n'exis²te pas
+        try {
+            // Create list Employee
+            List<Employee> listEmployees = Arrays.asList(new Employee("Baptiste", "baptiste@lamzone.com", 4),
+                    new Employee("Fanny", "fanny@lamzone.com", 10),
+                    new Employee("Vincent", "vincent@lamzone.com", 22));
 
+            // Create list Meeting
+            Meeting newMeeting = new Meeting("Réunion d'avancement",
+                    "Planck",
+                    "12/11/20",
+                    "15:30",
+                    "16:00",
+                    "Revues des dernières actions",
+                    listEmployees);
 
+            Meeting newMeeting2 = new Meeting("Réunion d'avancement2",
+                    "Planck",
+                    "12/11/20",
+                    "15:30",
+                    "16:00",
+                    "Revues des dernières actions",
+                    listEmployees);
 
+            service.addMeeting(newMeeting);
+
+            Meeting copy = service.findByObject("Réunion d'avancement2");
+        }
+
+        catch(Exception e){
+            Assertions.assertEquals(null, e.getMessage());
+        }
     }
 
     @Test
@@ -148,40 +176,31 @@ public class ListApiServiceTest {
                 new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3),
                 new Employee("Theo", "theo.ripoll@etu.unice.fr", 4));
 
-        Meeting newMeeting = new Meeting("Réunion d'avancement",
-                "Room",
-                "12/11/21",
-                "15:30",
-                "16:00",
-                "Revues des dernières actions",
-                listEmployees);
+        service.setListEmployees(listEmployees);
 
-        service.addMeeting(newMeeting);
+        Employee julien = service.findByName("julien");
 
-        Assert.assertNotEquals(service.findByName("Julien"), null);
+        Assert.assertEquals(julien.getEmail(), "julien.didier@etu.unice.fr");
 
     }
-@Disabled
+
     @Test
     public void findByNameNotExist() throws EmployeeNotFound{
         //employé n'existe pas
 
-        List<Employee> listEmployees = service.getListEmployees();
-
-        Employee julien = new Employee("Julien", "julien.didier@etu.unice.fr", 1);
-        Employee andrea = new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2);
-        Employee hugo = new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3);
-        Employee theo = new Employee("Theo", "theo.ripoll@etu.unice.fr", 4);
-
-        listEmployees.add(1, andrea);
-        listEmployees.add(2, hugo);
-        listEmployees.add(3, theo);
-
-        Assert.assertEquals(service.findByName("Andrea"), andrea);
-
         try {
+        List<Employee> listEmployees = Arrays.asList(new Employee("Julien", "julien.didier@etu.unice.fr", 1),
+                new Employee("Andrea", "andrea.larboulletmarin@etu.unice.fr", 2),
+                new Employee("Hugo", "hugo.goncalves-silva@etu.unice.fr", 3),
+                new Employee("Theo", "theo.ripoll@etu.unice.fr", 4));
+
+        service.setListEmployees(listEmployees);
+
+        Employee julien = service.findByName("julien");
+
+        Assert.assertEquals(julien.getEmail(), "julien.didier@etu.unice.fr");
+
             service.findByName("Julien");
-            Assertions.fail("Employee not found");
         }
         catch(EmployeeNotFound e){
             Assert.assertEquals(null, e.getMessage());
